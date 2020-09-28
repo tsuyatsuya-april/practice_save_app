@@ -1,10 +1,52 @@
+<table id="days">
+  <thead>
+    <tr>
+      <th id="prev">&laquo;</th>
+      <th id="title" colspan="5">2020/05</th>
+      <th id="next">&raquo;</th>
+    </tr> 
+    <tr>
+      <th>Sun</th>
+      <th>Mon</th>
+      <th>Tue</th>
+      <th>Wed</th>
+      <th>Thu</th>
+      <th>Fri</th>
+      <th>Sat</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+  </tbody>
+  <tfoot>
+    <tr>
+      <td id="today" colspan="7">Today</td>
+    </tr>
+  </tfoot>
+</table>
+<br>
+
 <%= form_for @event do |f| %>
   <%= f.text_field :name %>
   <%= f.text_area :description %>
+
+  
   
   <%= f.fields_for :schedules do |schedule_fields| %>
-    <%= schedule_fields.date_field :savedate %>
-    <%= schedule_fields.select :savetime, ['00:00~', '00:30~', '01:00~'], {include_blank: '選択'}, class: 'date_time' %>
+    <div id="select_days">
+      <ul id="add_date_style">
+        <li class = "date_input">
+          <%= schedule_fields.date_field :savedate %>
+        </li>
+        <li class = "date_time"> 
+          <%= schedule_fields.select :savetime, ['00:00~', '00:30~', '01:00~'], {include_blank: '選択'}, class: 'date_time' %>
+        </li>
+        <li class = "delete" >
+          <%= link_to '削除',"#" %>
+        </li>
+      </ul>
+    </div>
+    </br>
   <% end %>
 
   <%= f.fields_for :shops do |shop_fields| %>
