@@ -134,7 +134,7 @@ function main (){
     });
     
     createCalendar();
-
+    removeHTML();
     function getDays() {
       let myTbl = document.getElementById('days');
       for (let i=0;i<myTbl.rows.length;i++){
@@ -196,11 +196,11 @@ function main (){
       
       //削除の親となるli要素の生成
       const deleteParentLi = document.createElement('li');
-      deleteParentLi.setAttribute('class', 'delete');
+      deleteParentLi.setAttribute('id', 'delete');
 
       // 削除機能をつけるa要素の生成
-      const deleteHTML = document.createElement('a');
-      deleteHTML.setAttribute('href', '#');
+      const deleteHTML = document.createElement('p');
+      deleteHTML.setAttribute('style', `color:blue;`);
       deleteHTML.innerText = "削除";
       // 要素を追加
       ParentNode.appendChild(SecondParentUl);
@@ -242,10 +242,10 @@ function main (){
       }
       removeHTML();
     }
-
+    
     // 削除ボタンの実装
     function removeHTML(){
-      let targetList = document.querySelectorAll('.delete');
+      let targetList = document.querySelectorAll('#delete');
       let targetUl = document.querySelectorAll('#add_date_style');
       let targetNum = targetList.length;
       for (let i=0; i < targetNum; i++){
@@ -267,6 +267,7 @@ function main (){
     }
   }
   }
+  
 };
 
 window.addEventListener("load", main);
