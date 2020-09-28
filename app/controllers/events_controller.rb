@@ -1,7 +1,8 @@
 class EventsController < ApplicationController
   def new
     @event = Event.new
-    2.times { @event.schedules.build, @event.shops.build }
+    2.times { @event.schedules.build }
+    2.times { @event.shops.build }
   end 
   
   def create
@@ -17,6 +18,6 @@ class EventsController < ApplicationController
   private
     
     def event_params
-      params.require(:event).permit(:name, :description, schedule_attributes: [:savedate, :savetime], shop_attributes: [:shop_name, :shop_url, :map_url, :comment])
+      params.require(:event).permit(:name, :description, schedules_attributes: [:savedate, :savetime], shops_attributes: [:shop_name, :shop_url, :map_url, :comment])
     end
 end

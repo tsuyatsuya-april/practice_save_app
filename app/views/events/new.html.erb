@@ -2,12 +2,12 @@
   <%= f.text_field :name %>
   <%= f.text_area :description %>
   
-  <%= f.fields_for :schedule do |schedule_fields| %>
+  <%= f.fields_for :schedules do |schedule_fields| %>
     <%= schedule_fields.date_field :savedate %>
     <%= schedule_fields.select :savetime, ['00:00~', '00:30~', '01:00~'], {include_blank: '選択'}, class: 'date_time' %>
   <% end %>
 
-  <%= f.fields_for :shop do |shop_fields| %>
+  <%= f.fields_for :shops do |shop_fields| %>
     <%= shop_fields.text_field :shop_name %>
     <%= shop_fields.text_field :shop_url %>
     <%= shop_fields.text_field :map_url %>
