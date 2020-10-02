@@ -1,4 +1,8 @@
 class EventsController < ApplicationController
+  def index
+    @events = Event.all.order(id: 'DESC')
+  end
+
   def new
     @event = Event.new
     1.times { @event.schedules.build }
