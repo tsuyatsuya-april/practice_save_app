@@ -1,8 +1,8 @@
 class EventsController < ApplicationController
   def new
     @event = Event.new
-    @event.schedules.build
-    @event.shops.build
+    1.times { @event.schedules.build }
+    1.times { @event.shops.build } 
   end 
   
   def create

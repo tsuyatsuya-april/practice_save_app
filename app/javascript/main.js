@@ -2,14 +2,14 @@ function main (){
   console.clear();
 
   // 最初のレイアウトを削除する方法
-  firstDelete();
-  function firstDelete() {
-    const firstUl = document.getElementById('add_date_style');
-    const path = location.pathname
-    if (path === "/") {
-    firstUl.remove();
-    }
-  }
+  // firstDelete();
+  // function firstDelete() {
+  //   const firstUl = document.getElementById('add_date_style');
+  //   const path = location.pathname
+  //   if (path === "/") {
+  //   firstUl.remove();
+  //   }
+  // }
 
   
 

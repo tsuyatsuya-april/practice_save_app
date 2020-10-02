@@ -25,12 +25,14 @@
   </tfoot>
 </table>
 <br>
-
+<div><h3>イベント登録</h3></div>
 <%= form_for @event do |f| %>
+  <div><p>イベント名</p></div>
   <%= f.text_field :name %>
+  <div><p>詳細</p></div>
   <%= f.text_area :description %>
 
-  
+  <div><h3>日程</h3></div>
   <div id="select_days">
     <%= f.fields_for :schedules do |schedule_fields| %>
       
@@ -47,10 +49,15 @@
       </ul>
     <% end %>
    </div>
+   <div><h3>店名</h3></div>
   <%= f.fields_for :shops do |shop_fields| %>
+    <div><p>店名</p></div>
     <%= shop_fields.text_field :shop_name %>
+    <div><p>店のURL</p></div>
     <%= shop_fields.text_field :shop_url %>
+    <div><p>地図のURL</p></div>
     <%= shop_fields.text_field :map_url %>
+    <div><p>コメント</p></div>
     <%= shop_fields.text_field :comment %>
   <% end %>
   
