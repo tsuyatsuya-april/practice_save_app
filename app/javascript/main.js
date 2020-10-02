@@ -190,7 +190,7 @@ function main (){
       //select要素の生成
       const selectHTML = document.createElement('select');
       selectHTML.setAttribute('name', `event[schedules_attributes][${ulElementNum}][savetime]`);
-      selectHTML.setAttribute('id', `time_select_${ulElementNum}`);
+      selectHTML.setAttribute('id', `event_schedules_attributes_${ulElementNum}_savetime`);
       selectHTML.setAttribute('style', `width:80px;`);
       
       
@@ -225,8 +225,8 @@ function main (){
         
         if (i === 0){
           // 最初の未選択の場合の項目を作成
-          optionHTML.innerText = "----";
-          optionHTML.setAttribute('value', "---");
+          optionHTML.innerText = "";
+          optionHTML.setAttribute('value', "選択");
         } else if(i=== 39){
           // 反映した時に表示したい時刻を設定するため
           optionHTML.setAttribute('value', optionValue);
