@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_action :set_event, only: [:show, :edit, :update, :destroy]
   def index
     @events = Event.all.order(id: 'DESC')
   end
@@ -18,10 +19,27 @@ class EventsController < ApplicationController
       render 'new'
     end
   end
+
+  def show
+  end
+
+  def edit
+  end
+
+  def update
+  end
+
+  def destroy
+  end
+
   
   private
     
     def event_params
       params.require(:event).permit(:name, :description, schedules_attributes: [:savedate, :savetime], shops_attributes: [:shop_name, :shop_url, :map_url, :comment])
+    end
+
+    def set_event
+      @event = Event.find(params[:id])
     end
 end
