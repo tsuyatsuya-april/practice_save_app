@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'joins/new'
   root to: "events#index"
-  resources :events
+  resources :events do
+    resources :joins
+  end
 end
