@@ -5,5 +5,6 @@ class JoinsController < ApplicationController
 
 
   def create
+    
   end
 end
