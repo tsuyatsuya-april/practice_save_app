@@ -70,30 +70,35 @@
   <div class="join_users">
     <%= f.text_field :nickname, placeholder:"ニックネームを入力ください"%>
   </div>
-  <% @event.schedules.each do |et| %>
-    <ul id="join_schedules">
-      <li class="schedule_id">
-        <%= f.hidden_field :schedule_id, value: et.id %>
-      </li>
-      <li class="schedule_label">
-        <%= et.savedate %>: <%= et.savetime %>
-      </li>
-      <li class="schedule_vote">
-        <%= f.hidden_field :status, id:"schedule_status", value: 3 %>
-      </li>
-    </ul>
+  <%= f.fields_for :date_answers do |date_fields| %>
+    <% @event.schedules.each do |et| %>
+      <ul id="join_schedules">
+        <li class="schedule_id">
+          <%= date_fields.hidden_field :schedule_id, value: et.id %>
+        </li>
+        <li class="schedule_label">
+          <%= et.savedate %>: <%= et.savetime %>
+        </li>
+        <li class="schedule_vote">
+          <%= date_fields.hidden_field :status, id:"schedule_status", value: 3 %>
+        </li>
+      </ul>
+    <% end %>
   <% end %>
-  <% @event.shops.each do |es| %>
-    <ul id="join_shops">
-      <li class = "shop_id">
-        <%= f.hidden_field :shop_id, value: es.id %>
-      </li>
-      <li class="shop_label">
-        <%= es.shop_name %> URL:<%= es.shop_url %>
-      </li>
-      <li>
-        <%= f.hidden_field :status, id:"shops_status", value: 3 %>
-      </li>
-    </ul>
+  <%= f.fields_for :shop_answers do |shop_fields| %>
+    <% @event.shops.each do |es| %>
+      <ul id="join_shops">
+        <li class = "shop_id">
+          <%= shop_fields.hidden_field :shop_id, value: es.id %>
+        </li>
+        <li class="shop_label">
+          <%= es.shop_name %> URL:<%= es.shop_url %>
+        </li>
+        <li>
+          <%= shop_fields.hidden_field :status, id:"shops_status", value: 3 %>
+        </li>
+      </ul>
+    <% end %>
   <% end %>
+  <%= f.submit "Submit" %>
 <% end %>

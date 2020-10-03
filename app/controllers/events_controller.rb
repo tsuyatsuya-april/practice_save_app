@@ -21,6 +21,9 @@ class EventsController < ApplicationController
   end
 
   def show
+    @join = Join.new
+    @join.date_answers.build
+    @join.shop_answers.build
   end
 
   def edit
