@@ -26,7 +26,7 @@
 </table>
 <br>
 <div><h3>イベント登録</h3></div>
-<%= form_for @event do |f| %>
+<%= form_for @event, local: true do |f| %>
   <div><p>イベント名</p></div>
   <%= f.text_field :name %>
   <div><p>詳細</p></div>
