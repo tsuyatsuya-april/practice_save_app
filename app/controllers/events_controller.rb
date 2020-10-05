@@ -12,7 +12,6 @@ class EventsController < ApplicationController
   
   def create
     @event = Event.new(event_params)
-    binding.pry
     if @event.save
       flash[:success] = 'Event created!'
       redirect_to root_url
@@ -25,6 +24,8 @@ class EventsController < ApplicationController
     @join = Join.new
     1.times { @join.date_answers.build }
     1.times { @join.shop_answers.build }
+
+    @joins = Join.new
   end
 
   def edit

@@ -1,68 +1,95 @@
-<table id="days">
+<h1>イベント詳細情報</h1>
+
+<div>
+  <p>イベント名: <%= @event.name %></p>
+</div>
+<div>
+<p>詳細: <%= @event.description %></p>
+</div>
+
+<table>
   <thead>
     <tr>
-      <th id="prev">&laquo;</th>
-      <th id="title" colspan="5">2020/05</th>
-      <th id="next">&raquo;</th>
-    </tr> 
-    <tr>
-      <th>Sun</th>
-      <th>Mon</th>
-      <th>Tue</th>
-      <th>Wed</th>
-      <th>Thu</th>
-      <th>Fri</th>
-      <th>Sat</th>
+      <th>
+        <h4>日程</h4>
+      </th>
+      <% if @event.joins %>
+        <% @event.joins.each do |event_join| %>
+          <td>
+            <%= link_to event_join.nickname %>
+          </td>
+        <% end %>
+      <% end %>
     </tr>
   </thead>
-  <tbody>
-    
-  </tbody>
-  <tfoot>
-    <tr>
-      <td id="today" colspan="7">Today</td>
-    </tr>
-  </tfoot>
-</table>
-<br>
-<div><h3>イベント登録</h3></div>
-<div>
-  <p>イベント名</p><%= @event.name %>
-</div>
-<div><p>詳細</p>
-  <%= @event.description %>
-</div>
-
-<div><h3>日程</h3></div>
-<div id="select_days">
   <% @event.schedules.each do |et| %>
-    
-    <ul id="add_date_style">
-      <li class = "date_input">
-        <%= et.savedate %>
-      </li>
-      <li class = "date_time"> 
-        <%= et.savetime %>
-      </li>
-    </ul>
+    <tr id="select_days">
+      <th id="add_date_style">
+        <div>
+          <%= et.savedate %>:<%= et.savetime %>
+        </div>
+      </th>
+      <% if et.date_answer %>
+        <% et.date_answer.each do |da| %>
+          <td class = "date_time"> 
+            <%= da.status %>
+          </td>
+        <% end %>
+      <% end %>
+    </tr>
   <% end %>
-  </div>
-  <div><h3>店名</h3></div>
-<% @event.shops.each do |es| %>
-  <div><p>店名:</p>
-    <%= es.shop_name %>
-  </div>
-  <div><p>店のURL:</p>
-    <%= es.shop_url %>
-  </div>
-  <div><p>地図のURL:</p>
-    <%= es.map_url %>
-  </div>
-  <div><p>コメント:</p>
-    <%= es.comment %>
-  </div>
-<% end %>
+</table>
+ <br>
+ <br>
+ <table>
+  <thead>
+    <tr>
+      <th>
+        <h4>お店</h4>
+      </th>
+      <% if @event.joins %>
+        <% @event.joins.each do |event_join| %>
+          <td>
+            <%= link_to event_join.nickname %>
+          </td>
+        <% end %>
+      <% end %>
+    </tr>
+  </thead>
+  <% @event.shops.each do |es| %>
+    <tr>
+      <th>
+        <div>
+          <p>店名: <%= es.shop_name %></p>
+        </div>
+        <div>
+          <p>店のURL: <%= es.shop_url %></p>
+        </div>
+        <div>
+          <p>地図のURL: <%= es.map_url %></p>
+        </div>
+        <div>
+          <p>コメント: <%= es.comment %></p> 
+        </div>
+      </th>
+      <% if es.shop_answer %>
+        <% es.shop_answer.each do |sa| %>
+          <td class = "date_time"> 
+            <%= sa.status %>
+          </td>
+        <% end %>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <%= form_with model: @join, url:event_joins_path(@event.id), id:"join_form" , local: true do |f| %>
   <div>
     <label>ユーザー名</label>
@@ -78,13 +105,13 @@
     <% @event.schedules.each do |et| %>
       <ul id="join_schedules">
         <li class="schedule_id">
-          <%= date_fields.text_field :schedule_id, value: et.id %>
+          <%= date_fields.hidden_field :schedule_id, value: et.id %>
         </li>
         <li class="schedule_label">
           <%= et.savedate %>: <%= et.savetime %>
         </li>
         <li class="schedule_vote">
-          <%= date_fields.text_field :status, id:"schedule_status", value: 3 %>
+          <%= date_fields.hidden_field :status, id:"schedule_status", value: 3 %>
         </li>
       </ul>
     <% end %>
@@ -93,16 +120,16 @@
     <% @event.shops.each do |es| %>
       <ul id="join_shops">
         <li class = "shop_id">
-          <%= shop_fields.text_field :shop_id, value: es.id %>
+          <%= shop_fields.hidden_field :shop_id, value: es.id %>
         </li>
         <li class="shop_label">
           <%= es.shop_name %> URL:<%= es.shop_url %>
         </li>
         <li>
-          <%= shop_fields.text_field :status, id:"shops_status", value: 3 %>
+          <%= shop_fields.hidden_field :status, id:"shops_status", value: 3 %>
         </li>
         <li>
-          <%= shop_fields.text_field :vote, id:"shops_vote", value: 0 %>
+          <%= shop_fields.hidden_field :vote, id:"shops_vote", value: 0 %>
         </li>
       </ul>
     <% end %>
