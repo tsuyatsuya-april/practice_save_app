@@ -14,11 +14,12 @@ ActiveRecord::Schema.define(version: 2020_10_02_082004) do
 
   create_table "date_answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "join_id"
-    t.integer "schedule_id"
+    t.bigint "schedule_id"
     t.integer "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["join_id"], name: "index_date_answers_on_join_id"
+    t.index ["schedule_id"], name: "index_date_answers_on_schedule_id"
   end
 
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -48,12 +49,13 @@ ActiveRecord::Schema.define(version: 2020_10_02_082004) do
 
   create_table "shop_answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "join_id"
-    t.integer "shop_id"
+    t.bigint "shop_id"
     t.integer "status"
     t.integer "vote"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["join_id"], name: "index_shop_answers_on_join_id"
+    t.index ["shop_id"], name: "index_shop_answers_on_shop_id"
   end
 
   create_table "shops", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -68,8 +70,10 @@ ActiveRecord::Schema.define(version: 2020_10_02_082004) do
   end
 
   add_foreign_key "date_answers", "joins"
+  add_foreign_key "date_answers", "schedules"
   add_foreign_key "joins", "events"
   add_foreign_key "schedules", "events"
   add_foreign_key "shop_answers", "joins"
+  add_foreign_key "shop_answers", "shops"
   add_foreign_key "shops", "events"
 end

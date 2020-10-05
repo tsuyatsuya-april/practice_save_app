@@ -6,9 +6,20 @@ class JoinsController < ApplicationController
 
   def create
     @join = Join.new(join_params)
+    @event = Event.find(params[:event_id])
+    @join.event_id = @event.id
     if @join.save
       flash[:success] = 'join created!'
-      redirect_to event_path(:event_id)
+      redirect_to event_path(params[:event_id])
+    else
+      @event = Event.find(params[:event_id])
+      render "events/show"
+    end
+  end
+
+  def update
+    if @join.update(join_params)
+      redirect_to event_path(params[:event_id])
     else
       @event = Event.find(params[:event_id])
       render "events/show"
