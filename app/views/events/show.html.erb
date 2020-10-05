@@ -70,6 +70,10 @@
   <div class="join_users">
     <%= f.text_field :nickname, placeholder:"ニックネームを入力ください"%>
   </div>
+  <label>Eメール</label>
+  <div class="join_email">
+    <%= f.text_field :email, placeholder:"emailを記入ください"%>
+  </div>
   <%= f.fields_for :date_answers do |date_fields| %>
     <% @event.schedules.each do |et| %>
       <ul id="join_schedules">
@@ -96,6 +100,9 @@
         </li>
         <li>
           <%= shop_fields.text_field :status, id:"shops_status", value: 3 %>
+        </li>
+        <li>
+          <%= shop_fields.text_field :vote, id:"shops_vote", value: 0 %>
         </li>
       </ul>
     <% end %>

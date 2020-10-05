@@ -16,6 +16,6 @@ class JoinsController < ApplicationController
   end
 
   def join_params
-    params.require(:join).permit(:nickname, date_answers_attributes: [:schedule_id, :status], shop_answers_attributes: [:shop_id, :status])
+    params.require(:join).permit(:nickname, :email, date_answers_attributes: [:schedule_id, :status], shop_answers_attributes: [:shop_id, :status, :vote]).merge(event_id: :event_id)
   end
 end
