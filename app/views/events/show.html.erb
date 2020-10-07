@@ -90,50 +90,75 @@
 <br>
 <br>
 <br>
-<%= form_with model: @join, url:event_joins_path(@event.id), id:"join_form" , local: true do |f| %>
-  <div>
-    <label>ユーザー名</label>
+<div id="open">
+  <h1>回答する</h1>
+</div>
+<div id="mask" class="hidden"></div>
+<section id="modal" class="hidden">
+  <div id="close">
+    閉じる
   </div>
-  <div class="join_users">
-    <%= f.text_field :nickname, placeholder:"ニックネームを入力ください"%>
-  </div>
-  <label>Eメール</label>
-  <div class="join_email">
-    <%= f.text_field :email, placeholder:"emailを記入ください"%>
-  </div>
-  <%= f.fields_for :date_answers do |date_fields| %>
-    <% @event.schedules.each do |et| %>
-      <ul id="join_schedules">
-        <li class="schedule_id">
-          <%= date_fields.hidden_field :schedule_id, value: et.id %>
-        </li>
-        <li class="schedule_label">
-          <%= et.savedate %>: <%= et.savetime %>
-        </li>
-        <li class="schedule_vote">
-          <%= date_fields.hidden_field :status, id:"schedule_status", value: 3 %>
-        </li>
-      </ul>
-    <% end %>
+  <%= form_with model: @join, url:event_joins_path(@event.id), id:"join_form" , local: true do |f| %>
+    <div>
+      <label>ユーザー名</label>
+    </div>
+    <div class="join_users">
+      <%= f.text_field :nickname, placeholder:"ニックネームを入力ください"%>
+    </div>
+    <label>Eメール</label>
+    <div class="join_email">
+      <%= f.text_field :email, placeholder:"emailを記入ください"%>
+    </div>
+    <h1>日程選択</h1>
+    <table>
+      <tbody>
+        <%= f.fields_for :date_answers do |date_fields| %>
+          <% @event.schedules.each do |et| %>
+            <tr >
+              <th id="join_schedules">
+                <%= et.savedate %>: <%= et.savetime %>
+              </th>
+              <td class="schedule_vote">
+                <%= date_fields.hidden_field :schedule_id,class:"schedule_id", value: et.id %>
+                <%= date_fields.hidden_field :status, id:"schedule_status",class:"schedule_vote", value: 2 %>
+                <div id="shop_change_status">
+                <h1 class="btn btn--orange btn--circle btn--circle-a btn--shadow " id="date_yes">◯</h1>
+                <h1 class="btn btn--orange btn--circle btn--circle-a btn--shadow choice" id="date_delta">△</h1>
+                <h1 class="btn btn--orange btn--circle btn--circle-a btn--shadow" id="date_no">×</h1>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+    <h1>店舗選択</h1>
+    <table>
+      <tbody>
+        <%= f.fields_for :shop_answers do |shop_fields| %>
+          <% @event.shops.each do |es| %>
+            <tr id="join_shops">
+              <th class="shop_label">
+                <%= es.shop_name %> URL:<%= es.shop_url %>
+              </th>
+              <td>
+                <%= shop_fields.hidden_field :shop_id,class:"shop_id", value: es.id %>
+                <%= shop_fields.hidden_field :status, id:"shops_status", value: 2 %>
+                <%= shop_fields.hidden_field :vote, id:"shops_vote", value: 0 %>
+                <div id="shop_change_status">
+                  <h1 class="btn btn--orange btn--circle btn--circle-a btn--shadow " id="shop_yes">◯</h1>
+                  <h1 class="btn btn--orange btn--circle btn--circle-a btn--shadow choice" id="shop_delta">△</h1>
+                  <h1 class="btn btn--orange btn--circle btn--circle-a btn--shadow" id="shop_no">×</h1>
+                </div>
+                <div id="shop_change_vote">
+                  <h1 class="btn btn--orange btn--circle btn--circle-a btn--shadow" id="shop_vote">一番</h1>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+    <%= f.submit "Submit" %>
   <% end %>
-  <%= f.fields_for :shop_answers do |shop_fields| %>
-    <% @event.shops.each do |es| %>
-      <ul id="join_shops">
-        <li class = "shop_id">
-          <%= shop_fields.hidden_field :shop_id, value: es.id %>
-        </li>
-        <li class="shop_label">
-          <%= es.shop_name %> URL:<%= es.shop_url %>
-        </li>
-        <li>
-          <%= shop_fields.hidden_field :status, id:"shops_status", value: 3 %>
-        </li>
-        <li>
-          <%= shop_fields.hidden_field :vote, id:"shops_vote", value: 0 %>
-        </li>
-      </ul>
-    <% end %>
-  <% end %>
-  <%= f.submit "Submit" %>
-<% end %>
-
+</section>
