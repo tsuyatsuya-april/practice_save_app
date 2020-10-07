@@ -1,5 +1,4 @@
 <h1>イベント詳細情報</h1>
-
 <div>
   <p>イベント名: <%= @event.name %></p>
 </div>
@@ -82,18 +81,11 @@
     </tr>
   <% end %>
 </table>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <div id="open">
   <h1>回答する</h1>
 </div>
-<div id="mask" class="hidden"></div>
+
+<div id="mask" class="hidden">
 <section id="modal" class="hidden">
   <div id="close">
     閉じる
@@ -162,3 +154,4 @@
     <%= f.submit "Submit" %>
   <% end %>
 </section>
+</div>

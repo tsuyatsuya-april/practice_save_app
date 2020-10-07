@@ -2,9 +2,10 @@ const path = location.pathname;
 if(path.length >= 7 && path.slice(0,7) === "/events"){
   function join(){
     many_save_OK();
+    modalAddJoin();
     DateStatusValue();
     shopStatusValue();
-    modalAddJoin();
+    
     
     
     
