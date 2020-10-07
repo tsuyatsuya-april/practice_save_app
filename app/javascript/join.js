@@ -161,10 +161,6 @@ if(path.length >= 7 && path.slice(0,7) === "/events"){
       modal.classList.add('hidden');
       mask.classList.add('hidden');
     });
-
-    mask.addEventListener('click', () => {
-      close.click();
-    });
   }
 
 

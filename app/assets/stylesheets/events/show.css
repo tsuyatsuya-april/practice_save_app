@@ -57,14 +57,12 @@ h1{
   background: #fff;
   width: 800px;
   padding: 20px;
-  border-radius: 4px;
-  position: absolute;
-  top: 40px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  transition: transform 0.4s;
-  z-index: 2;
+  position:fixed;/* 階層を上にする */
+  height:80%;/* モーダルの高さ */
+  top:50%;/* bodyの上から50%分ずらす */
+  left:50%;/* bodyの左から50%分ずらす */
+  transform:translate(-50%,-50%);/* 指定した位置から真ん中にずらす */
+  overflow-y:scroll;
 }
 
 #modal > p {
