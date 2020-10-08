@@ -26,6 +26,8 @@ class EventsController < ApplicationController
     @joins = Join.all
     if params[:join_id]
       set_join
+      @shops = Shop.all
+      @schedules = Schedule.all
     else
       @join = Join.new
       1.times { @join.date_answers.build }

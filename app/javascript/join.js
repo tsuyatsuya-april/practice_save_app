@@ -1,9 +1,13 @@
 const path = location.pathname;
+const query = location.search;
 if(path.length >= 7 && path.slice(0,7) === "/events"){
   function join(){
     many_save_OK();
     DateStatusValue();
     shopStatusValue();
+    if(query.includes('join_id')){
+      transEditLabel();
+    }
     modalAddJoin();
     
     
@@ -179,6 +183,28 @@ if(path.length >= 7 && path.slice(0,7) === "/events"){
       modal.classList.add('hidden');
       mask.classList.add('hidden');
     });
+  }
+
+  // 編集フォームに一覧表の日付：時間、お店：urlの項目を追加する
+  function transEditLabel(){
+    let transSaveDate = document.querySelectorAll('#trans_savedate');
+    let transSaveTime = document.querySelectorAll('#trans_savetime');
+    let transShopName = document.querySelectorAll('#trans_shop_name');
+    let transShopUrl = document.querySelectorAll('#trans_shop_url');
+    let passSaveDate = document.querySelectorAll('#pass_savedate');
+    let passSaveTime = document.querySelectorAll('#pass_savetime');
+    let passShopName = document.querySelectorAll('#pass_shop_name');
+    let passShopUrl = document.querySelectorAll('#pass_shop_url');
+    let transSaveLength = transSaveDate.length;
+    let transShopLength = transShopName.length;
+    for (let i=0; i < transSaveLength; i++){
+      transSaveDate[i].innerHTML = passSaveDate[i].innerHTML;
+      transSaveTime[i].innerHTML = passSaveTime[i].innerHTML;
+    }
+    for (let d=0; d < transShopLength; d++){
+      transShopUrl[d].innerHTML = passShopUrl[d].innerHTML;
+      transShopName[d].innerHTML = passShopName[d].innerHTML;
+    }
   }
 
 
