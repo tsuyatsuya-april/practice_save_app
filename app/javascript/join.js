@@ -59,6 +59,10 @@ if(path.length >= 7 && path.slice(0,7) === "/events"){
       let shopStatus = document.querySelectorAll('#shops_status');
       let shopLength = shopStatus.length;
       for (let i=0; i < shopLength; i++){
+        // valueがnullなら初期値の2を与える。
+        if(shopStatus[i].value != 1 && shopStatus[i].value != 2 && shopStatus[i].value != 3){
+          shopStatus[i].value = 2;
+        }
         //yesをクリックした時にchoiceクラスの追加、それ以外のフォームのchoiceクラスの削除、フォームのバリューを１に設定
         shopYes[i].onclick = function(){
           if(shopYes[i].classList.contains('choice') == false){

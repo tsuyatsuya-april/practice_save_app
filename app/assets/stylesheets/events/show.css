@@ -33,7 +33,7 @@ h1{
   text-align: center;
 }
 
-#open, #close {
+#open, #close, #edit_open, #edit_close {
   cursor: pointer;
   width: 200px;
   border: 1px solid #ccc;
@@ -43,7 +43,7 @@ h1{
   margin: 16px auto 0;
 }
 
-#mask {
+#mask, #edit_mask {
   background: rgba(0,0,0,0.4);
   position: fixed;
   top: 0;
@@ -53,7 +53,7 @@ h1{
   z-index: 1;
 }
 
-#modal{
+#modal, #edit_modal{
   background: #fff;
   width: 800px;
   padding: 20px;
@@ -65,14 +65,14 @@ h1{
   overflow-y:scroll;
 }
 
-#modal > p {
+#modal > p, #edit_modal > p{
   margin: 0 0 20px;
 }
 
-#mask.hidden{
+#mask.hidden, #edit_mask.hidden{
   display: none;
 }
 
-#modal.hidden{
+#modal.hidden, #edit_modal.hidden{
   transform: translate(0, -500px);
 }

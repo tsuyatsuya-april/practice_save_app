@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  
+
   def index
     @events = Event.all.order(id: 'DESC')
   end
@@ -21,11 +23,10 @@ class EventsController < ApplicationController
   end
 
   def show
+    @joins = Join.all
     @join = Join.new
     1.times { @join.date_answers.build }
     1.times { @join.shop_answers.build }
-
-    @joins = Join.new
   end
 
   def edit
