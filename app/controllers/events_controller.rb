@@ -24,9 +24,13 @@ class EventsController < ApplicationController
 
   def show
     @joins = Join.all
-    @join = Join.new
-    1.times { @join.date_answers.build }
-    1.times { @join.shop_answers.build }
+    if params[:join_id]
+      set_join
+    else
+      @join = Join.new
+      1.times { @join.date_answers.build }
+      1.times { @join.shop_answers.build }
+    end
   end
 
   def edit
@@ -47,5 +51,8 @@ class EventsController < ApplicationController
 
     def set_event
       @event = Event.find(params[:id])
+    end
+    def set_join
+      @join = Join.find(params[:join_id])
     end
 end

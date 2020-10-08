@@ -15,7 +15,7 @@
       <% if @event.joins %>
         <% @event.joins.each do |event_join| %>
           <td>
-            <%= link_to event_join.nickname, edit_event_join_path(params[:id],event_join.id) %>
+            <%= link_to event_join.nickname, event_path(@event.id,join_id: event_join.id) %>
           </td>
         <% end %>
       <% end %>

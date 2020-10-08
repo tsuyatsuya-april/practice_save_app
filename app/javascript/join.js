@@ -2,10 +2,9 @@ const path = location.pathname;
 if(path.length >= 7 && path.slice(0,7) === "/events"){
   function join(){
     many_save_OK();
-    modalAddJoin();
     DateStatusValue();
     shopStatusValue();
-    
+    modalAddJoin();
     
     
     
@@ -108,7 +107,21 @@ if(path.length >= 7 && path.slice(0,7) === "/events"){
       let dateDelta = document.querySelectorAll('#date_delta');
       let dateStatus = document.querySelectorAll('#schedule_status');
       let dateLength = dateStatus.length;
+      //ループカウンタを変数dcとする
+      let dc=0;
       for (let i=0; i < dateLength; i++){
+        // 初回のメソッドループ内のみ、valueの値に応じて、◯×△にチョイスを与える。
+        if(dc < dateLength && dateStatus[i].value == 1){
+          dateDelta[i].classList.remove('choice');
+          dateYes[i].classList.add('choice');
+        } else if(dc < dateLength && dateStatus[i].value == 3){
+          dateDelta[i].classList.remove('choice');
+          dateNo[i].classList.add('choice');
+        }
+        // valueがnullなら初期値の2を与える。
+        if(dateStatus[i].value != 1 && dateStatus[i].value != 2 && dateStatus[i].value != 3){
+          dateStatus[i].value = 2;
+        }
         //yesをクリックした時にchoiceクラスの追加、それ以外のフォームのchoiceクラスの削除、フォームのバリューを１に設定
         dateYes[i].onclick = function(){
           if(dateYes[i].classList.contains('choice') == false){
@@ -145,6 +158,7 @@ if(path.length >= 7 && path.slice(0,7) === "/events"){
             dateStatus[i].value = 3;
           }
         };
+        dc++;
       };
     }
 
