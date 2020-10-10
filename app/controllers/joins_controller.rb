@@ -1,6 +1,6 @@
 class JoinsController < ApplicationController
-  before_action :set_join, only: :edit
-  before_action :set_event, only: :edit
+  before_action :set_event, only: :update 
+  before_action :set_join, only: :update
   def new
   end
 
@@ -19,11 +19,8 @@ class JoinsController < ApplicationController
 
   def edit
   end
-  
+
   def update
-    @join = Join.new(join_params)
-    @event = Event.find(params[:event_id])
-    @join.event_id = @event.id
     if @join.update(join_params)
       redirect_to event_path(params[:event_id])
     else

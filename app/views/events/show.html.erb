@@ -160,7 +160,7 @@
 </section>
 </div>
 <% if params[:join_id] %>
-  <%= form_with model: @join, url:event_joins_path(@event.id), id:"join_form" , local: true do |f| %>
+  <%= form_with model: @join, url:event_join_path(@event.id, @join.id), id:"join_edit_form" , local: true do |f| %>
     <div>
       <label>ユーザー名</label>
     </div>
@@ -174,52 +174,49 @@
     <h1>日程選択</h1>
     <table>
       <tbody>
-          <%= f.fields_for :date_answers do |date_fields| %>  
-            <tr >
-              
-              <th id="join_schedules">
-                <span id="trans_savedate"></span>:<span id="trans_savetime"></span>
-              </th>
+        <%= f.fields_for :date_answers do |date_fields| %>  
+          <tr >
             
-              <td class="schedule_vote">
-                <%= date_fields.hidden_field :schedule_id,class:"schedule_id" %>
-                <%= date_fields.hidden_field :status, id:"schedule_status",class:"schedule_vote" %>
-                <div id="shop_change_status">
+            <th id="join_schedules">
+              <span id="trans_savedate"></span>:<span id="trans_savetime"></span>
+            </th>  
+            <td class="schedule_vote">
+              <%= date_fields.hidden_field :schedule_id,class:"schedule_edit_id" %>
+              <%= date_fields.hidden_field :status, id:"schedule_edit_status",class:"schedule_vote" %>
+              <div id="shop_change_status">
                 <h1 class="btn btn--orange btn--circle btn--circle-a btn--shadow " id="date_yes">◯</h1>
                 <h1 class="btn btn--orange btn--circle btn--circle-a btn--shadow choice" id="date_delta">△</h1>
                 <h1 class="btn btn--orange btn--circle btn--circle-a btn--shadow" id="date_no">×</h1>
-                </div>
-              </td>
-            </tr>
-          <% end %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
     <h1>店舗選択</h1>
     <table>
       <tbody> 
-          <%= f.fields_for :shop_answers do |shop_fields| %>
-            <tr id="join_shops">
-              <% if params[:join_id] %>
-              <th class="shop_label">
-                <span id="trans_shop_name"></span><br>
-                <span id="trans_shop_url"></span>
-              </th>
-              <% end %>
-              <td>
-                <%= shop_fields.hidden_field :shop_id,class:"shop_id" %>
-                <%= shop_fields.hidden_field :status, id:"shops_status" %>
-                <%= shop_fields.hidden_field :vote, id:"shops_vote" %>
-                <div id="shop_change_status">
-                  <h1 class="btn btn--orange btn--circle btn--circle-a btn--shadow " id="shop_yes">◯</h1>
-                  <h1 class="btn btn--orange btn--circle btn--circle-a btn--shadow choice" id="shop_delta">△</h1>
-                  <h1 class="btn btn--orange btn--circle btn--circle-a btn--shadow" id="shop_no">×</h1>
-                </div>
-                <div id="shop_change_vote">
-                  <h1 class="btn btn--orange btn--circle btn--circle-a btn--shadow" id="shop_vote">一番</h1>
-                </div>
-              </td>
-            </tr>
-          <% end %>
+        <%= f.fields_for :shop_answers do |shop_fields| %>
+          <tr id="join_shops">
+            <th class="shop_label">
+              <span id="trans_shop_name"></span><br>
+              <span id="trans_shop_url"></span>
+            </th>
+            <td>
+              <%= shop_fields.hidden_field :shop_id,class:"shop_id" %>
+              <%= shop_fields.hidden_field :status, id:"shops_status" %>
+              <%= shop_fields.hidden_field :vote, id:"shops_vote" %>
+              <div id="shop_change_status">
+                <h1 class="btn btn--orange btn--circle btn--circle-a btn--shadow " id="shop_yes">◯</h1>
+                <h1 class="btn btn--orange btn--circle btn--circle-a btn--shadow choice" id="shop_delta">△</h1>
+                <h1 class="btn btn--orange btn--circle btn--circle-a btn--shadow" id="shop_no">×</h1>
+              </div>
+              <div id="shop_change_vote">
+                <h1 class="btn btn--orange btn--circle btn--circle-a btn--shadow" id="shop_vote">一番</h1>
+              </div>
+            </td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
     <%= f.submit "Submit" %>
