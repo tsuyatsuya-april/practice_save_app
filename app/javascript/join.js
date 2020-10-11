@@ -5,6 +5,8 @@ if(path.length >= 7 && path.slice(0,7) === "/events"){
     manySaveOk();
     DateStatusValue();
     shopStatusValue();
+    CountDateStatus();
+    CountShopStatus();
     if(query.includes('join_id')){
       transEditLabel();
       shopEditStatusValue();
@@ -332,6 +334,58 @@ if(path.length >= 7 && path.slice(0,7) === "/events"){
       };
       dc++;
     };
+  }
+  function CountDateStatus(){
+    let dateTbl = document.getElementById('date-table');
+    for(let i=0;i<dateTbl.rows.length;i++){
+      let circle=0;
+      let delta=0;
+      let cross=0;
+      for(let j=0;j<dateTbl.rows[i].cells.length;j++){ 
+        let Cells = dateTbl.rows[i].cells[j].innerText;
+        if (i>0 && j > 3){
+          console.log(Cells);
+          if (Cells == "◯"){
+            circle++;
+          } else if(Cells == "△"){
+            delta++;
+          } else if(Cells == "×"){
+            cross++;
+          }
+        }
+      }
+      if (i>0){
+        dateTbl.rows[i].cells[1].innerHTML = circle;
+        dateTbl.rows[i].cells[2].innerHTML = delta;
+        dateTbl.rows[i].cells[3].innerHTML = cross;
+      }
+    }
+  }
+  function CountShopStatus(){
+    let shopTbl = document.getElementById('shop-table');
+    for(let i=0;i<shopTbl.rows.length;i++){
+      let circle=0;
+      let delta=0;
+      let cross=0;
+      for(let j=0;j<shopTbl.rows[i].cells.length;j++){ 
+        let Cells = shopTbl.rows[i].cells[j].innerText;
+        if (i>0 && j > 3){
+          console.log(Cells);
+          if (Cells == "◯"){
+            circle++;
+          } else if(Cells == "△"){
+            delta++;
+          } else if(Cells == "×"){
+            cross++;
+          }
+        }
+      }
+      if (i>0){
+        shopTbl.rows[i].cells[1].innerHTML = circle;
+        shopTbl.rows[i].cells[2].innerHTML = delta;
+        shopTbl.rows[i].cells[3].innerHTML = cross;
+      }
+    }
   }
   window.addEventListener("load", join);
 }

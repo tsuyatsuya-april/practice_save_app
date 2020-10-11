@@ -6,12 +6,21 @@
 <p>詳細: <%= @event.description %></p>
 </div>
 
-<table>
+<table id="date-table">
   <thead>
     <tr>
       <th>
         <h4>日程</h4>
       </th>
+      <td class="index-status-form">
+        ◯
+      </td>
+      <td class="index-status-form">
+        △
+      </td>
+      <td class="index-status-form cross">
+        ×
+      </td>
       <% if @event.joins %>
         <% @event.joins.each do |event_join| %>
           <td>
@@ -28,11 +37,32 @@
           <span id="pass-savedate"><%= et.savedate %></span>:<span id="pass-savetime"><%= et.savetime %></span>
         </div>
       </th>
+      <td class="sum-maru">
+        
+      </td>
+      <td class="sum-delta">
+        
+      </td>
+      <td class="sum-cross">
+        
+      </td>
       <% if et.date_answer %>
         <% et.date_answer.each do |da| %>
-          <td class = "date-time"> 
-            <div class="date-letter-style">
-            <%= da.status %>
+          <td class = "date-index"> 
+            <div class="date-index-status">
+              <%= da.status %>
+            </div>
+            <div class="index-status-form">
+              <% if da.status == 1 %>
+                ◯
+              <% elsif da.status == 2 %>
+                △
+              <% else %>
+                <span class="cross">
+                  ×
+                </span>
+              <% end %>
+            </div>
           </td>
         <% end %>
       <% end %>
@@ -41,12 +71,21 @@
 </table>
  <br>
  <br>
- <table>
+ <table id="shop-table">
   <thead>
     <tr>
       <th>
         <h4>お店</h4>
       </th>
+      <td class="index-status-form">
+        ◯
+      </td>
+      <td class="index-status-form">
+        △
+      </td>
+      <td class="index-status-form cross">
+        ×
+      </td>
       <% if @event.joins %>
         <% @event.joins.each do |event_join| %>
           <td>
@@ -57,8 +96,8 @@
     </tr>
   </thead>
   <% @event.shops.each do |es| %>
-    <tr>
-      <th>
+    <tr id="select-days">
+      <th id="add-date-style">
         <div>
           <span id="pass-shop-name">店名: <%= es.shop_name %></span>
         </div>
@@ -72,10 +111,29 @@
           <span id="pass-comment">コメント: <%= es.comment %></span> 
         </div>
       </th>
+      <td class="sum-maru">
+      </td>
+      <td class="sum-delta">
+      </td>
+      <td class="sum-cross">
+      </td>
       <% if es.shop_answer %>
         <% es.shop_answer.each do |sa| %>
-          <td class = "date-time"> 
-            <%= sa.status %>
+          <td class = "date-index">
+            <div class="shop-index-status"> 
+              <%= sa.status %>
+            </div>
+            <div class="index-status-form">
+              <% if sa.status == 1 %>
+                ◯
+              <% elsif sa.status == 2 %>
+                △
+              <% else %>
+                <span class="cross">
+                  ×
+                </span>
+              <% end %>
+            </div>
           </td>
         <% end %>
       <% end %>

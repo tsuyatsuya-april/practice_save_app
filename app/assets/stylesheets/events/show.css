@@ -76,3 +76,17 @@ h1{
 #modal.hidden, #edit-modal.hidden{
   transform: translate(0, -500px);
 }
+
+.date-index-status, .shop-index-status{
+  display: none;
+}
+
+.index-status-form{
+  font-size: 25px;
+  font-weight: 900;
+  color: #eb6100;
+}
+
+.cross{
+  font-size: 45px;
+}
