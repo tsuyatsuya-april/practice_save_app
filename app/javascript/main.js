@@ -165,16 +165,16 @@ if(path === "/events/new" || path === "/events" || path.slice(0,7) === "/events"
       }
       //HTML要素を作成して、追加するメソッド
       function createHTML (date_string) {
-        const ParentNode = document.getElementById('select_days');
+        const ParentNode = document.getElementById('select-days');
 
         //選択フォームを作成する元となるul要素を生成
         const SecondParentUl = document.createElement('ul');
-        SecondParentUl.setAttribute('id', "add_date_style");
-        let ulElementNum = document.querySelectorAll('#add_date_style').length;
+        SecondParentUl.setAttribute('id', "add-date-style");
+        let ulElementNum = document.querySelectorAll('#add-date-style').length;
 
         //inputの親となるli要素の生成
         const inputParentLi = document.createElement('li');
-        inputParentLi.setAttribute('class', "date_input");
+        inputParentLi.setAttribute('class', "date-input");
 
         //input要素の生成
         const inputHTML = document.createElement('input');
@@ -187,7 +187,7 @@ if(path === "/events/new" || path === "/events" || path.slice(0,7) === "/events"
 
         //selectの親となるli要素の生成
         const selectParentLi = document.createElement('li');
-        selectParentLi.setAttribute('class', "date_time");
+        selectParentLi.setAttribute('class', "date-time");
 
         //select要素の生成
         const selectHTML = document.createElement('select');
@@ -248,7 +248,7 @@ if(path === "/events/new" || path === "/events" || path.slice(0,7) === "/events"
       // 削除ボタンの実装
       function removeHTML(){
         let targetList = document.querySelectorAll('#delete');
-        let targetUl = document.querySelectorAll('#add_date_style');
+        let targetUl = document.querySelectorAll('#add-date-style');
         let targetNum = targetList.length;
         for (let i=0; i < targetNum; i++){
           targetList[i].onclick = function(){
@@ -259,10 +259,10 @@ if(path === "/events/new" || path === "/events" || path.slice(0,7) === "/events"
       formSubmitJudge();
     // フォームがゼロの時提出できないようにする為の処理
     function formSubmitJudge() {
-      document.getElementById("create_data_submit").addEventListener('click', checkFormNumber);
+      document.getElementById("create-data-submit").addEventListener('click', checkFormNumber);
 
       function checkFormNumber(event) {
-        if(document.querySelectorAll('#add_date_style').length === 0) {
+        if(document.querySelectorAll('#add-date-style').length === 0) {
           event.preventDefault();
           alert("カレンダーの日付を選択した後、時間の設定をしてください");
         }

@@ -14,15 +14,8 @@ if(path.length >= 7 && path.slice(0,7) === "/events"){
     }
     
     
-    
-    
-    
-    
-    
-    
-    
     function manySaveOk(){
-      let targetList0 = document.querySelectorAll('#schedule_status');
+      let targetList0 = document.querySelectorAll('#schedule-status');
       let targetNum0 = targetList0.length;
       for(let i=0; i<targetNum0; i++){
         targetList0[i].removeAttribute('name','join[date_answers_attributes][0][status]')
@@ -43,14 +36,14 @@ if(path.length >= 7 && path.slice(0,7) === "/events"){
         targetList3[i].setAttribute('name',`join[shop_answers_attributes][${i}][shop_id]`)
       }
 
-      let targetList4 = document.querySelectorAll('#shops_status');
+      let targetList4 = document.querySelectorAll('#shops-status');
       let targetNum4 = targetList4.length;
       for(let i=0; i<targetNum4; i++){
         targetList4[i].removeAttribute('name','join[shop_answers_attributes][0][status]')
         targetList4[i].setAttribute('name',`join[shop_answers_attributes][${i}][status]`)
       }
 
-      let targetList5 = document.querySelectorAll('#shops_vote');
+      let targetList5 = document.querySelectorAll('#shops-vote');
       let targetNum5 = targetList5.length;
       for(let i=0; i<targetNum5; i++){
         targetList5[i].removeAttribute('name','join[shop_answers_attributes][0][vote]')
@@ -60,13 +53,22 @@ if(path.length >= 7 && path.slice(0,7) === "/events"){
     }
     //お店のスケジュールステータスの状態変化
     function shopStatusValue(){
-      let shopYes = document.querySelectorAll('#shop_yes');
-      let shopNo = document.querySelectorAll('#shop_no');
-      let shopDelta = document.querySelectorAll('#shop_delta');
-      let shopStatus = document.querySelectorAll('#shops_status');
+      let shopYes = document.querySelectorAll('#shop-yes');
+      let shopNo = document.querySelectorAll('#shop-no');
+      let shopDelta = document.querySelectorAll('#shop-delta');
+      let shopStatus = document.querySelectorAll('#shops-status');
       let shopLength = shopStatus.length;
+      let sc=0;
       for (let i=0; i < shopLength; i++){
-        // valueがnullなら初期値の2を与える。
+        // 初回のメソッドループ内のみ、valueの値に応じて、◯×△にチョイスを与える。
+        if(sc < shopLength && shopStatus[i].value == 1){
+          shopDelta[i].classList.remove('choice');
+          shopYes[i].classList.add('choice');
+        } else if(sc < shopLength && shopStatus[i].value == 3){
+          shopDelta[i].classList.remove('choice');
+          shopNo[i].classList.add('choice');
+        }
+        // valueがnullなら初期値の2を与える
         if(shopStatus[i].value != 1 && shopStatus[i].value != 2 && shopStatus[i].value != 3){
           shopStatus[i].value = 2;
         }
@@ -110,10 +112,10 @@ if(path.length >= 7 && path.slice(0,7) === "/events"){
     }
     //日付のスケジュールステータスの状態変化
     function DateStatusValue(){
-      let dateYes = document.querySelectorAll('#date_yes');
-      let dateNo = document.querySelectorAll('#date_no');
-      let dateDelta = document.querySelectorAll('#date_delta');
-      let dateStatus = document.querySelectorAll('#schedule_status');
+      let dateYes = document.querySelectorAll('#date-yes');
+      let dateNo = document.querySelectorAll('#date-no');
+      let dateDelta = document.querySelectorAll('#date-delta');
+      let dateStatus = document.querySelectorAll('#schedule-status');
       let dateLength = dateStatus.length;
       //ループカウンタを変数dcとする
       let dc=0;
@@ -190,14 +192,14 @@ if(path.length >= 7 && path.slice(0,7) === "/events"){
 
   // 編集フォームに一覧表の日付：時間、お店：urlの項目を追加する
   function transEditLabel(){
-    let transSaveDate = document.querySelectorAll('#trans_savedate');
-    let transSaveTime = document.querySelectorAll('#trans_savetime');
-    let transShopName = document.querySelectorAll('#trans_shop_name');
-    let transShopUrl = document.querySelectorAll('#trans_shop_url');
-    let passSaveDate = document.querySelectorAll('#pass_savedate');
-    let passSaveTime = document.querySelectorAll('#pass_savetime');
-    let passShopName = document.querySelectorAll('#pass_shop_name');
-    let passShopUrl = document.querySelectorAll('#pass_shop_url');
+    let transSaveDate = document.querySelectorAll('#trans-savedate');
+    let transSaveTime = document.querySelectorAll('#trans-savetime');
+    let transShopName = document.querySelectorAll('#trans-shop-name');
+    let transShopUrl = document.querySelectorAll('#trans-shop-url');
+    let passSaveDate = document.querySelectorAll('#pass-savedate');
+    let passSaveTime = document.querySelectorAll('#pass-savetime');
+    let passShopName = document.querySelectorAll('#pass-shop-name');
+    let passShopUrl = document.querySelectorAll('#pass-shop-url');
     let transSaveLength = transSaveDate.length;
     let transShopLength = transShopName.length;
     for (let i=0; i < transSaveLength; i++){
@@ -209,51 +211,24 @@ if(path.length >= 7 && path.slice(0,7) === "/events"){
       transShopName[d].innerHTML = passShopName[d].innerHTML;
     }
   }
-  function manyEditSaveOk(){
-    let targetList0 = document.querySelectorAll('#schedule_status');
-    let targetNum0 = targetList0.length;
-    for(let i=0; i<targetNum0; i++){
-      targetList0[i].removeAttribute('name','join[date_answers_attributes][0][status]')
-      targetList0[i].setAttribute('name',`join[date_answers_attributes][${i}][status]`)
-    }
-
-    let targetList2 = document.querySelectorAll('#join_date_answers_attributes_0_schedule_id');
-    let targetNum2 = targetList2.length;
-    for(let i=0; i<targetNum2; i++){
-      targetList2[i].removeAttribute('name','join[date_answers_attributes][0][schedule_id]')
-      targetList2[i].setAttribute('name',`join[date_answers_attributes][${i}][schedule_id]`)
-    }
-
-    let targetList3 = document.querySelectorAll('#join_shop_answers_attributes_0_shop_id');
-    let targetNum3 = targetList3.length;
-    for(let i=0; i<targetNum3; i++){
-      targetList3[i].removeAttribute('name','join[shop_answers_attributes][0][shop_id]')
-      targetList3[i].setAttribute('name',`join[shop_answers_attributes][${i}][shop_id]`)
-    }
-
-    let targetList4 = document.querySelectorAll('#shops_status');
-    let targetNum4 = targetList4.length;
-    for(let i=0; i<targetNum4; i++){
-      targetList4[i].removeAttribute('name','join[shop_answers_attributes][0][status]')
-      targetList4[i].setAttribute('name',`join[shop_answers_attributes][${i}][status]`)
-    }
-
-    let targetList5 = document.querySelectorAll('#shops_vote');
-    let targetNum5 = targetList5.length;
-    for(let i=0; i<targetNum5; i++){
-      targetList5[i].removeAttribute('name','join[shop_answers_attributes][0][vote]')
-      targetList5[i].setAttribute('name',`join[shop_answers_attributes][${i}][vote]`)
-    }
-      
-  }
+  
   //お店のスケジュールステータスの状態変化
   function shopEditStatusValue(){
-    let shopEditYes = document.querySelectorAll('#shop_edit_yes');
-    let shopEditNo = document.querySelectorAll('#shop_edit_no');
-    let shopEditDelta = document.querySelectorAll('#shop_edit_delta');
-    let shopEditStatus = document.querySelectorAll('#shops_edit_status');
+    let shopEditYes = document.querySelectorAll('#shop-edit-yes');
+    let shopEditNo = document.querySelectorAll('#shop-edit-no');
+    let shopEditDelta = document.querySelectorAll('#shop-edit-delta');
+    let shopEditStatus = document.querySelectorAll('#shops-edit-status');
     let shopEditLength = shopEditStatus.length;
+    let sec = 0;
     for (let i=0; i < shopEditLength; i++){
+      // 初回のメソッドループ内のみ、valueの値に応じて、◯×△にチョイスを与える。
+      if(sec < shopEditLength && shopEditStatus[i].value == 1){
+        shopEditDelta[i].classList.remove('choice');
+        shopEditYes[i].classList.add('choice');
+      } else if(sec < shopEditLength && shopEditStatus[i].value == 3){
+        shopEditDelta[i].classList.remove('choice');
+        shopEditNo[i].classList.add('choice');
+      }
       // valueがnullなら初期値の2を与える。
       if(shopEditStatus[i].value != 1 && shopEditStatus[i].value != 2 && shopEditStatus[i].value != 3){
         shopEditStatus[i].value = 2;
@@ -299,10 +274,10 @@ if(path.length >= 7 && path.slice(0,7) === "/events"){
 
   //日付のスケジュールステータスの状態変化
   function DateEditStatusValue(){
-    let dateEditYes = document.querySelectorAll('#date_edit_yes');
-    let dateEditNo = document.querySelectorAll('#date_edit_no');
-    let dateEditDelta = document.querySelectorAll('#date_edit_delta');
-    let dateEditStatus = document.querySelectorAll('#schedule_edit_status');
+    let dateEditYes = document.querySelectorAll('#date-edit-yes');
+    let dateEditNo = document.querySelectorAll('#date-edit-no');
+    let dateEditDelta = document.querySelectorAll('#date-edit-delta');
+    let dateEditStatus = document.querySelectorAll('#schedule-edit-status');
     let dateEditLength = dateEditStatus.length;
     //ループカウンタを変数dcとする
     let dc=0;

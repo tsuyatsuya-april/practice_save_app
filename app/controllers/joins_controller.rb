@@ -35,6 +35,7 @@ private
       .merge(event_id: :event_id)
   end
 
+  # マージをつけていると更新されない
   def join_update_params
     params.require(:join).permit(:nickname, :email, 
       date_answers_attributes: [:id,:schedule_id, :status, :_destroy], 

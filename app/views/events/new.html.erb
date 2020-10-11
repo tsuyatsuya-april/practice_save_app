@@ -33,14 +33,14 @@
   <%= f.text_area :description %>
 
   <div><h3>日程</h3></div>
-  <div id="select_days">
+  <div id="select-days">
     <%= f.fields_for :schedules do |schedule_fields| %>
       
-      <ul id="add_date_style">
-        <li class = "date_input">
+      <ul id="add-date-style">
+        <li class = "date-input">
           <%= schedule_fields.date_field :savedate %>
         </li>
-        <li class = "date_time"> 
+        <li class = "date-time"> 
           <%= schedule_fields.select :savetime, [
             ['00:00~','0:00'], ['00:30~', '0:30'], 
             ['01:00~', '1:00'],['01:30~', '1:30'],
@@ -67,7 +67,7 @@
             ['22:00~', '22:00'],['22:30~', '22:30'],
             ['23:00~', '23:00'],['23:30~', '23:30'],
             ], 
-              {include_blank: '選択',selected:'19:00'}, class: 'date_time' %>
+              {include_blank: '選択',selected:'19:00'}, class: 'date-time' %>
         </li>
         <li id = "delete" >
           <p>削除</p>

@@ -1,13 +1,13 @@
 <h1>トップページです</h1>
 <% if @events %>
   <% @events.each do |event| %>
-    <div id="select_days">
+    <div id="select-days">
     <%= link_to event_path(event.id) do%>
-      <ul id="add_date_style">
-        <li class = "date_input">
+      <ul id="add-date-style">
+        <li class = "date-input">
           <%= event.name %>
         </li>
-        <li class = "date_time"> 
+        <li class = "date-time"> 
           <%= event.description %>
         </li>
       </ul>
