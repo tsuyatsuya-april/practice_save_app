@@ -1,5 +1,5 @@
 const path = location.pathname;
-if(path === "/events/new" || path === "/events" || path.slice(0,7) === "/events"){
+if(path === "/events/new" || path === "/events" || path.slice(0,7) === "/events" && path.length <= 8){
   function main (){
     console.clear();
 
