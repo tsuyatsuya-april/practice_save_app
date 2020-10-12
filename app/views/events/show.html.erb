@@ -279,4 +279,5 @@
     </table>
     <%= f.submit "Submit" %>
   <% end %>
+  <%= link_to "削除",event_join_path(@event.id, @join.id), method: :delete %>
 <% end %>

@@ -1,6 +1,6 @@
 class JoinsController < ApplicationController
-  before_action :set_event, only: :update 
-  before_action :set_join, only: :update
+  before_action :set_event, only: [:update, :destroy] 
+  before_action :set_join, only: [:update, :destroy]
   def new
   end
 
@@ -27,6 +27,15 @@ class JoinsController < ApplicationController
       render "events/show"
     end
   end
+
+  def destroy
+    if @join.destroy
+      redirect_to event_path(params[:event_id])
+    else
+      render "events/show"
+    end
+  end
+
 private
   def join_params
     params.require(:join).permit(:nickname, :email, 
