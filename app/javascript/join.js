@@ -7,6 +7,10 @@ if(path.length >= 7 && path.slice(0,7) === "/events"){
     shopStatusValue();
     CountDateStatus();
     CountShopStatus();
+    //Count系のメソッドでまるばつサンカクを集計した後にexpect系メソッドで集計後の◯の最高値に対して背景色をつける
+    //なので、Count系メソッド→expect系メソッドの順番でなければならない
+    expectDay();
+    expectShop();
     if(query.includes('join_id')){
       transEditLabel();
       shopEditStatusValue();
@@ -335,6 +339,7 @@ if(path.length >= 7 && path.slice(0,7) === "/events"){
       dc++;
     };
   }
+  // 日程の一覧表にマルバツサンカクの集計を反映させる
   function CountDateStatus(){
     let dateTbl = document.getElementById('date-table');
     for(let i=0;i<dateTbl.rows.length;i++){
@@ -344,7 +349,6 @@ if(path.length >= 7 && path.slice(0,7) === "/events"){
       for(let j=0;j<dateTbl.rows[i].cells.length;j++){ 
         let Cells = dateTbl.rows[i].cells[j].innerText;
         if (i>0 && j > 3){
-          console.log(Cells);
           if (Cells == "◯"){
             circle++;
           } else if(Cells == "△"){
@@ -361,6 +365,7 @@ if(path.length >= 7 && path.slice(0,7) === "/events"){
       }
     }
   }
+  // お店の一覧表にマルバツサンカクの集計を反映させる
   function CountShopStatus(){
     let shopTbl = document.getElementById('shop-table');
     for(let i=0;i<shopTbl.rows.length;i++){
@@ -370,7 +375,6 @@ if(path.length >= 7 && path.slice(0,7) === "/events"){
       for(let j=0;j<shopTbl.rows[i].cells.length;j++){ 
         let Cells = shopTbl.rows[i].cells[j].innerText;
         if (i>0 && j > 3){
-          console.log(Cells);
           if (Cells == "◯"){
             circle++;
           } else if(Cells == "△"){
@@ -384,6 +388,39 @@ if(path.length >= 7 && path.slice(0,7) === "/events"){
         shopTbl.rows[i].cells[1].innerHTML = circle;
         shopTbl.rows[i].cells[2].innerHTML = delta;
         shopTbl.rows[i].cells[3].innerHTML = cross;
+      }
+    }
+  }
+  // 日程の一覧表で◯の集計が最高値の行に背景色を付与
+  function expectDay() {
+    let dateTbl = document.getElementById('date-table');
+    let row = dateTbl.rows.length;
+    let mc = 0;
+    for(i=1;i<row;i++){
+      if(dateTbl.rows[i].cells[1].innerHTML > mc){
+        mc = dateTbl.rows[i].cells[1].innerHTML;
+      }
+    }
+    for(j=0;j<row;j++){
+      if(dateTbl.rows[j].cells[1].innerHTML == mc && mc > 0){
+        dateTbl.rows[j].style.backgroundColor = "pink";
+      }
+    }
+  }
+
+  // お店の一覧表で◯の集計が最高値の行に背景色を付与
+  function expectShop() {
+    let shopTbl = document.getElementById('shop-table');
+    let row = shopTbl.rows.length;
+    let mc = 0;
+    for(i=1;i<row;i++){
+      if(shopTbl.rows[i].cells[1].innerHTML > mc){
+        mc = shopTbl.rows[i].cells[1].innerHTML;
+      }
+    }
+    for(j=0;j<row;j++){
+      if(shopTbl.rows[j].cells[1].innerHTML == mc && mc > 0){
+        shopTbl.rows[j].style.backgroundColor = "pink";
       }
     }
   }
